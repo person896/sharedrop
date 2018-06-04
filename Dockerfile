@@ -1,4 +1,4 @@
-FROM centos:7.5.1804
+FROM centos:7.2.1511
 
 RUN yum install -y epel-release \
 && yum install nodejs \
