@@ -17,10 +17,12 @@ USER sharedrop
 RUN cd /opt \
 && tar -xvf node-v6.9.4-linux-x64.tar.xz \
 && rm -f node-v6.9.4-linux-x64.tar.xz \
-&& git clone https://github.com/cowbell/sharedrop.git
-
-RUN cd /opt/sharedrop \
-&& npm install \ 
+&& git clone https://github.com/cowbell/sharedrop.git \
+&& cd /opt/sharedrop \
+&& npm install -g npm \
+&& npm install -g gulp bower \
+&& npm install \
+&& bower install --allow-root \
 && npm install -g ember-cli \
 && ember install \
 && cp .env{.sample,} \
