@@ -15,26 +15,18 @@ RUN chown -Rf sharedrop:sharedrop /opt
 USER sharedrop
 
 RUN cd /opt \
+&& tar -xvf node-v6.9.4-linux-x64.tar.xz
+&& rm -f node-v6.9.4-linux-x64.tar.xz
 && git clone https://github.com/cowbell/sharedrop.git
 
-RUN cd /opt \
-RUN tar -xvf node-v6.9.4-linux-x64.tar.xz
-
-RUN cd /opt \
-RUN rm -f node-v6.9.4-linux-x64.tar.xz
+RUN yum install -y npm
 
 RUN cd /opt/sharedrop \
-&& npm install -g ember-cli
-
-RUN cd /opt/sharedrop \
-&& ember install
-
-RUN cd /opt/sharedrop \
-&& cp .env{.sample,}
-
-RUN cd /opt/sharedrop \
+&& npm install \ 
+&& npm install -g ember-cli \
+&& ember install \
+&& cp .env{.sample,} \
 && npm run dev
-
 
 USER root
 
