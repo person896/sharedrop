@@ -4,7 +4,7 @@ RUN yum update -y
 RUN yum install -y epel-release
 RUN yum install -y curl
 RUN yum install -y php-curl
-RUN sh -c 'curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -'
+RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
 RUN yum install -y nodejs
 RUN yum install -y git
 RUN git clone https://github.com/cowbell/sharedrop.git
