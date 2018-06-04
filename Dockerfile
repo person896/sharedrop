@@ -5,7 +5,7 @@ RUN useradd sharedrop
 RUN yum install -y epel-release
 RUN yum install -y git
 
-ADD wget -P /opt https://nodejs.org/dist/v6.9.4/node-v6.9.4-linux-x64.tar.xz
+RUN wget -P /opt https://nodejs.org/dist/v6.9.4/node-v6.9.4-linux-x64.tar.xz
 RUN chown -Rf sharedrop:sharedrop /opt
 
 USER sharedrop
