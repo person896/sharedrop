@@ -1,6 +1,6 @@
 FROM centos:7.2.1511
 
-RUN yum update
+RUN yum update -y
 RUN yum install -y epel-release
 RUN yum install -y curl
 RUN yum install -y php-curl
