@@ -15,11 +15,9 @@ RUN chown -Rf sharedrop:sharedrop /opt
 USER sharedrop
 
 RUN cd /opt \
-&& tar -xvf node-v6.9.4-linux-x64.tar.xz
-&& rm -f node-v6.9.4-linux-x64.tar.xz
+&& tar -xvf node-v6.9.4-linux-x64.tar.xz \
+&& rm -f node-v6.9.4-linux-x64.tar.xz \
 && git clone https://github.com/cowbell/sharedrop.git
-
-RUN yum install -y npm
 
 RUN cd /opt/sharedrop \
 && npm install \ 
