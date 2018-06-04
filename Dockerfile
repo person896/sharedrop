@@ -1,26 +1,29 @@
 FROM centos:7.2.1511
 
+ENV PATH /opt/node-v6.9.4-linux-x64/bin:$PATH
+
 RUN useradd sharedrop
 
-RUN yum install -y epel-release
-RUN yum install -y git
-RUN yum install -y wget
+RUN yum install -y epel-release \
+&& yum install -y git \
+&& yum install -y wget
 
 RUN wget -P /opt https://nodejs.org/dist/v6.9.4/node-v6.9.4-linux-x64.tar.xz
+
 RUN chown -Rf sharedrop:sharedrop /opt
 
 USER sharedrop
 
-RUN cd /opt
 RUN tar -xvf /opt/node-v6.9.4-linux-x64.tar.xz
 RUN rm -f /opt/node-v6.9.4-linux-x64.tar.xz
 
-RUN git clone https://github.com/cowbell/sharedrop.git
-RUN cd /opt/sharedrop
-RUN npm install
-RUN npm install -g ember-cli
-RUN ember install
-RUN cp .env{.sample,}
+RUN cd /opt\
+&& git clone https://github.com/cowbell/sharedrop.git
+&& cd /opt/sharedrop
+&& npm install
+&& npm install -g ember-cli
+&& ember install
+&& cp .env{.sample,}
 RUN npm run dev
 
 EXPOSE 80
