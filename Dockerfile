@@ -4,14 +4,13 @@ RUN apt-get upgrade -y
 RUN apt-get install curl -y
 RUN sh -c 'curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -'
 RUN apt-get install nodejs git -y
-RUN git clone https://github.com/cowbell/sharedrop.git
-RUN cd /sharedrop
+COPY . /src
+RUN cd /src
 RUN ln -s /usr/bin/nodejs /usr/sbin/node
 RUN npm install -g npm
-RUN npm install -g ember-cli
-RUN ember install
-RUN cp .env{.sample,}
-RUN npm run dev
-
+RUN npm install -g gulp bower
+RUN cd /src; npm install
+RUN cd /src; bower install --allow-root
 EXPOSE 3002
-WORKDIR /sharedrop
+WORKDIR /src
+CMD [ "bash", "start.sh" ]
