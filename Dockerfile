@@ -1,16 +1,27 @@
-FROM ubuntu
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install curl -y
-RUN sh -c 'curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -'
-RUN apt-get install nodejs git -y
-COPY . /src
-RUN cd /src
-RUN ln -s /usr/bin/nodejs /usr/sbin/node
-RUN npm install -g npm
-RUN npm install -g gulp bower
-RUN cd /src; npm install
-RUN cd /src; bower install --allow-root
-EXPOSE 3002
-WORKDIR /src
-CMD [ "bash", "start.sh" ]
+FROM centos:7.2.1511
+
+RUN useradd sharedrop
+
+RUN yum install -y epel-release
+RUN yum install -y git
+
+ADD https://nodejs.org/dist/v6.9.4/node-v6.9.4-linux-x64.tar.xz /opt
+RUN chown -Rf sharedrop:sharedrop /opt
+
+USER sharedrop
+
+RUN cd /opt
+RUN tar -xvf node-v6.9.4-linux-x64.tar.xz
+RUN rm -f node-v6.9.4-linux-x64.tar.xz
+
+RUN git clone https://github.com/cowbell/sharedrop.git
+RUN cd /opt/sharedrop
+RUN npm install
+RUN npm install -g ember-cli
+RUN ember install
+RUN cp .env{.sample,}
+RUN npm run dev
+
+EXPOSE 80
+
+WORKDIR /opt/sharedrop
