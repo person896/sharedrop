@@ -29,6 +29,12 @@ RUN cd /opt/sharedrop \
 && npm install \
 
 RUN cd /opt/sharedrop \
+&& nvm install 8.10.0
+
+RUN cd /opt/sharedrop \
+&& npm install -g npm
+
+RUN cd /opt/sharedrop \
 && npm install -g ember-cli
 
 RUN cd /opt/sharedrop \
