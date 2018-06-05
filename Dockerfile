@@ -29,7 +29,9 @@ RUN cd /opt/sharedrop \
 && npm install \
 
 RUN cd /opt/sharedrop \
-&& nvm install 8.10.0
+&& npm cache clean -f \
+&& npm install -g n \
+&& n stable
 
 RUN cd /opt/sharedrop \
 && npm install -g npm
