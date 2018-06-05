@@ -5,7 +5,7 @@ ENV PATH /opt/node-v6.9.4-linux-x64/bin:$PATH
 RUN useradd sharedrop
 
 RUN yum install -y epel-release \
-&& yum install -y git
+&& yum install -y git \
 && yum install -y nodejs
 
 RUN chown -Rf sharedrop:sharedrop /opt
