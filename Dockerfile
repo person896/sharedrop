@@ -5,12 +5,12 @@ ENV PATH /opt/node-v9.9.0-linux-x64/bin:$PATH
 RUN useradd sharedrop
 
 RUN yum install -y git \
+&& yum install -y epel-release
 
-ADD https://nodejs.org/dist/v6.9.4/node-v9.9.0-linux-x64.tar.xz /opt \
-&& cd /opt \
-&& tar --strip-components 1 -xzvf node-v9.9.0-linux-x64.tar.xz
+ADD https://nodejs.org/dist/v9.9.0/node-v9.9.0-linux-x64.tar.xz /opt \
 
-RUN make install
+RUN cd /opt \
+  && tar -xvf node-v9.9.0-linux-x64.tar.xz
 
 RUN chown -Rf sharedrop:sharedrop /opt
 
