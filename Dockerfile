@@ -7,7 +7,6 @@ RUN yum install -y git \
 RUN cd / \
 && git clone https://github.com/cowbell/sharedrop.git
 
-RUN cd /sharedrop && npm install -g npm
 RUN cd /sharedrop && npm install -g ember-cli
 RUN cd /sharedrop && npm install && ember install
 RUN cd /sharedrop && cp .env{.sample,}
