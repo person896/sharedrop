@@ -5,7 +5,7 @@ RUN yum install -y git \
 && yum install -y nodejs
 
 RUN cd / \
-&& git clone https://github.com/cowbell/sharedrop.git
+&& git clone https://github.com/person896/sharedrop.git
 
 RUN cd /sharedrop && npm install -g ember-cli
 RUN cd /sharedrop && npm install && ember install
