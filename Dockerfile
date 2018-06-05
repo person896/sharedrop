@@ -2,7 +2,7 @@ FROM centos:7.2.1511
 
 ENV PATH /opt/node-v9.9.0-linux-x64/bin:$PATH
 
-RUN useradd sharedrop
+USER root
 
 RUN yum install -y git \
 && yum install -y epel-release
@@ -12,14 +12,11 @@ ADD https://nodejs.org/dist/v9.9.0/node-v9.9.0-linux-x64.tar.xz /opt \
 RUN cd /opt \
   && tar -xvf node-v9.9.0-linux-x64.tar.xz
 
-RUN chown -Rf sharedrop:sharedrop /opt
-
-USER sharedrop
-
 RUN cd /opt \
 && git clone https://github.com/cowbell/sharedrop.git
 
 RUN cd /opt/sharedrop \
+&& yum install -y npm \
 && npm install 
 
 RUN cd /opt/sharedrop \
@@ -33,8 +30,6 @@ RUN cd /opt/sharedrop \
 
 RUN cd /opt/sharedrop \
 && npm run dev
-
-USER root
 
 EXPOSE 80
 
