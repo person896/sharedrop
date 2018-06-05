@@ -1,12 +1,20 @@
 FROM centos:7.2.1511
 
-ENV PATH /opt/node-v9.9.0-linux-x64/bin:$PATH
+ENV PATH /opt/node-v9.9.0/bin:$PATH
 
 RUN useradd sharedrop
 
-RUN yum install -y epel-release \
-&& yum install -y git \
-&& yum install -y nodejs
+RUN yum install -y git \
+&& yum install -y wget
+
+RUN wget -P /opt http://nodejs.org/dist/v9.9.0/node-v9.9.0.tar.gz \
+&& cd /opt \
+&& tar xzvf node-v* && cd node-v* \
+&& yum install -y gcc gcc-c++ \
+&& ./configure \
+&& make
+
+RUN make install
 
 RUN chown -Rf sharedrop:sharedrop /opt
 
